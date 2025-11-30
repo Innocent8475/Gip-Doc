@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pro Editor Ultimate</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styling -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+</head>
+<body>
+
+    <!-- SIDEBAR: Document Navigation -->
+    <div id="pagesSidebar" class="pages-sidebar">
+        <div class="sidebar-header">
+            <h3>Structure</h3>
+            <button onclick="window.ViewModule.togglePagesSidebar()" class="close-sidebar-btn"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="sidebar-content" id="sidebarContent">
+            <!-- Headers (H1, H2) link here automatically -->
+            <div style="color:var(--text-muted); padding:10px;">No headings found.</div>
+        </div>
+    </div>
+
+    <!-- UTILITY: Toasts & Modals -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Modal: Text Prompt -->
+    <div class="modal-overlay" id="customPromptModal">
+        <div class="modal-card prompt-card">
+            <h3 id="promptTitle">Input</h3>
+            <input type="text" id="promptInput" class="custom-input">
+            <div class="modal-actions">
+                <button class="btn-secondary" id="promptCancel">Cancel</button>
+                <button class="btn-primary" id="promptConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: PDF Viewer -->
+    <div class="modal-overlay" id="pdfViewerModal">
+        <div class="preview-container">
+            <div class="preview-header">
+                <h3>PDF Reader</h3>
+                <button class="close-modal-icon" onclick="window.FileModule.closePdfViewer()"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="preview-body" id="pdfCanvasContainer" style="flex-direction: column; align-items: center; gap: 20px;">
+                <!-- Canvases -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Print Preview -->
+    <div class="modal-overlay" id="previewModal">
+        <div class="preview-container">
+            <div class="preview-header">
+                <h3>Print Preview</h3>
+                <button class="close-modal-icon" onclick="window.SystemModule.closePreview()"><i class="ri-close-line"></i></button>
+            </div>
+            <div class="preview-body light-theme-preview" id="previewBody">
+                <!-- Editor Clone -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP STRUCTURE -->
+    <div class="app-layout">
+        
+        <!-- Header & Menu -->
+        <div class="header">
+            <div class="menu-scroller">
+                <div class="menu-items">
+                    <button class="menu-btn active" data-menu="Home">Home</button>
+                    <button class="menu-btn" data-menu="File">File</button>
+                    <button class="menu-btn" data-menu="Insert">Insert</button>
+                    <button class="menu-btn" data-menu="Layout">Layout</button>
+                    <button class="menu-btn" data-menu="View">View</button>
+                    <button class="menu-btn special-menu" onclick="window.ViewModule.togglePagesSidebar()">Pages</button>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="preview-btn" onclick="window.ViewModule.openPreview()">Preview</button>
+            </div>
+        </div>
+
+        <!-- Toolbar (Height expands for dropdowns) -->
+        <div class="toolbar-wrapper">
+            <div class="toolbar" id="toolbar"></div>
+        </div>
+
+        <!-- The "Desk" -->
+        <div class="workspace" id="workspace">
+            <!-- The Paper -->
+            <div class="paper" id="editor" contenteditable="true" spellcheck="false">
+                <h1>Welcome to Ultimate Editor</h1>
+                <p>Start typing or use the Insert menu to add shapes...</p>
+            </div>
+        </div>
+
+        <!-- Status Footer -->
+        <div class="footer">
+            <span id="wordCount">0 words</span>
+            <span id="saveStatus"><i class="ri-check-double-line"></i> Ready</span>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC (Load Order is Critical) -->
+    <!-- 1. Kernel -->
+    <script src="editor/main.js"></script>
+    <!-- 2. UI System -->
+    <script src="editor/system.js"></script>
+    <!-- 3. Feature Modules -->
+    <script src="editor/home.js"></script>
+    <script src="editor/file.js"></script>
+    <script src="editor/insert.js"></script>
+    <script src="editor/layout.js"></script>
+    <script src="editor/view.js"></script>
+    <!-- 4. Main Controller -->
+    <script src="editor.js"></script>
+
+</body>
+</html>
