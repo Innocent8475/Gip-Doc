@@ -1,6 +1,6 @@
 
 # Gip Doc 📝
-
+https://innocent8475.github.io/Gip-Doc/
 **Gip Doc** is an ultra-robust, lightweight, and modular WYSIWYG text editor built entirely with native HTML, CSS, and JavaScript. It replicates the functionality and look-and-feel of modern cloud processors (like Google Docs) without the overhead of heavy frameworks.
 
 It features a realistic "Paper" UI, drag-and-drop shape resizing, a built-in PDF viewer, and a document navigation sidebar.
